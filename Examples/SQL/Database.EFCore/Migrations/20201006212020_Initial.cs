@@ -9,7 +9,7 @@ namespace Database.EFCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Summary",
+                name: "Author",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -18,32 +18,32 @@ namespace Database.EFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Summary", x => x.Id);
+                    table.PrimaryKey("PK_Author", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Weather",
+                name: "Book",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SummaryId = table.Column<int>(nullable: true),
+                    AuthorId = table.Column<int>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Temperature = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Weather", x => x.Id);
+                    table.PrimaryKey("PK_Book", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Weather_Summary_SummaryId",
-                        column: x => x.SummaryId,
-                        principalTable: "Summary",
+                        name: "FK_Book_Author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Author",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
-                table: "Summary",
+                table: "Author",
                 columns: new[] { "Id", "Code" },
                 values: new object[,]
                 {
@@ -60,28 +60,28 @@ namespace Database.EFCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Weather",
-                columns: new[] { "Id", "Date", "SummaryId", "Temperature" },
+                table: "Book",
+                columns: new[] { "Id", "Date", "AuthorId", "Temperature" },
                 values: new object[,]
                 {
-                    { 3, new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, -10m },
+                    { 3, new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "s" },
                     { 1, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, -1.3m },
                     { 2, new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5.1m }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Weather_SummaryId",
-                table: "Weather",
-                column: "SummaryId");
+                name: "IX_Book_AuthorId",
+                table: "Book",
+                column: "AuthorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Weather");
+                name: "Book");
 
             migrationBuilder.DropTable(
-                name: "Summary");
+                name: "Author");
         }
     }
 }

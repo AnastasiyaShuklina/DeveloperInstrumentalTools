@@ -9,7 +9,7 @@ namespace Database.EFCore.Migrations
         {
             migrationBuilder.RenameColumn(
                 name: "Date",
-                table: "Weather",
+                table: "Book",
                 newName: "TimeStamp");
         }
 
@@ -17,7 +17,7 @@ namespace Database.EFCore.Migrations
         {
             migrationBuilder.RenameColumn(
                 name: "TimeStamp",
-                table: "Weather",
+                table: "Book",
                 newName: "Date");
         }
     }

@@ -37,63 +37,63 @@ namespace Database.EFCore.Migrations
                         new
                         {
                             Id = 1,
-                            Code = "Freezing"
+                            Name =  "Freezing"
                         },
                         new
                         {
                             Id = 2,
-                            Code = "Bracing"
+                            Name =  "Bracing"
                         },
                         new
                         {
                             Id = 3,
-                            Code = "Chilly"
+                            Name =  "Chilly"
                         },
                         new
                         {
                             Id = 4,
-                            Code = "Cool"
+                            Name =  "Cool"
                         },
                         new
                         {
                             Id = 5,
-                            Code = "Mild"
+                            Name =  "Mild"
                         },
                         new
                         {
                             Id = 6,
-                            Code = "Warm"
+                            Name =  "Warm"
                         },
                         new
                         {
                             Id = 7,
-                            Code = "Balmy"
+                            Name =  "Balmy"
                         },
                         new
                         {
                             Id = 8,
-                            Code = "Hot"
+                            Name =  "Hot"
                         },
                         new
                         {
                             Id = 9,
-                            Code = "Sweltering"
+                            Name =  "Sweltering"
                         },
                         new
                         {
                             Id = 10,
-                            Code = "Scorching"
+                            Name =  "Scorching"
                         });
                 });
 
-            modelBuilder.Entity("Database.EFCore.Entities.WeatherEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.BookEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("SummaryId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Temperature")
@@ -104,39 +104,39 @@ namespace Database.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SummaryId");
+                    b.HasIndex("AuthorId");
 
-                    b.ToTable("Weather");
+                    b.ToTable("Book");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            SummaryId = 3,
-                            Temperature = -1.3m,
+                            AuthorId = 3,
+                            Title = "Test",
                             TimeStamp = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            SummaryId = 5,
-                            Temperature = 5.1m,
+                            AuthorId = 5,
+                            Title = "Example",
                             TimeStamp = new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            SummaryId = 1,
-                            Temperature = -10m,
+                            AuthorId = 1,
+                            Title = "Sample",
                             TimeStamp = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
-            modelBuilder.Entity("Database.EFCore.Entities.WeatherEntity", b =>
+            modelBuilder.Entity("Database.EFCore.Entities.BookEntity", b =>
                 {
                     b.HasOne("Database.EFCore.Entities.SummaryEntity", "Summary")
                         .WithMany()
-                        .HasForeignKey("SummaryId");
+                        .HasForeignKey("AuthorId");
                 });
 #pragma warning restore 612, 618
         }

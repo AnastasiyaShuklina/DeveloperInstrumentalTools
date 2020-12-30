@@ -7,8 +7,8 @@ namespace Database.EFCore
 {
     public partial class ExampleContext : DbContext
     {
-        public DbSet<SummaryEntity> Summaries { get; set; }
-        public DbSet<WeatherEntity> Weathers { get; set; }
+        public DbSet<AuthorEntity> Authors { get; set; }
+        public DbSet<BookEntity> Books { get; set; }
         
         public ExampleContext()
         {
@@ -31,57 +31,57 @@ namespace Database.EFCore
         {
             OnModelCreatingPartial(modelBuilder);
 
-            modelBuilder.Entity<WeatherEntity>(entity =>
+            modelBuilder.Entity<BookEntity>(entity =>
             {
-                entity.ToTable("Weather");
+                entity.ToTable("Book");
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Id).UseIdentityColumn();
-                entity.HasOne(d => d.Summary);
+                entity.HasOne(d => d.Author);
             });
 
-            modelBuilder.Entity<SummaryEntity>(entity =>
+            modelBuilder.Entity<AuthorEntity>(entity =>
             {
-                entity.ToTable("Summary");
+                entity.ToTable("Author");
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.Id).UseIdentityColumn();
             });
             
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 1, Code = "Freezing" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 2, Code = "Bracing" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 3, Code = "Chilly" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 4, Code = "Cool" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 5, Code = "Mild" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 6, Code = "Warm" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 7, Code = "Balmy" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 8, Code = "Hot" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 9, Code = "Sweltering" });
-            modelBuilder.Entity<SummaryEntity>().HasData(new SummaryEntity { Id = 10, Code = "Scorching" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 1, Name = "Freezing" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 2, Name = "Bracing" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 3, Name = "Chilly" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 4, Name = "Cool" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 5, Name = "Mild" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 6, Name = "Warm" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 7, Name = "Balmy" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 8, Name = "Hot" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 9, Name = "Sweltering" });
+            modelBuilder.Entity<AuthorEntity>().HasData(new AuthorEntity { Id = 10, Name = "Scorching" });
             
-            modelBuilder.Entity<WeatherEntity>().HasData(new
+            modelBuilder.Entity<BookEntity>().HasData(new
             {
                 Id = 1, 
                 TimeStamp = new DateTime(2020, 1, 1),
-                Temperature = -1.3m,
-                SummaryId = 3
+                Title = "Test",
+                AuthorId = 3
             });
             
-            modelBuilder.Entity<WeatherEntity>().HasData(new
+            modelBuilder.Entity<BookEntity>().HasData(new
             {
                 Id = 2, 
                 TimeStamp = new DateTime(2020, 1, 2),
-                Temperature = 5.1m,
-                SummaryId = 5
+                Title = "Example",
+                AuthorId = 5
             });
             
-            modelBuilder.Entity<WeatherEntity>().HasData(new
+            modelBuilder.Entity<BookEntity>().HasData(new
             {
                 Id = 3, 
                 TimeStamp = new DateTime(2020, 1, 3),
-                Temperature = -10m,
-                SummaryId = 1
+                Title = "Sample",
+                AuthorId = 1
             });
             
-            //modelBuilder.Entity<WeatherEntity>().OwnsOne(p => p.Summary).HasData(new { Date = new DateTime(2020, 1, 1), Temperature = -1, Code = "Chill" });
+            //modelBuilder.Entity<WeatherEntity>().OwnsOne(p => p.Summary).HasData(new { Date = new DateTime(2020, 1, 1), Temperature = -1, Name = "Chill" });
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
